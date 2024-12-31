@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use("/api", router);
 
-const port = 5000;
+const port = 4000;
 app.listen(port, async () => {
   await connectDB(); 
   console.log(`Server running on port ${port}`);
