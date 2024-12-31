@@ -35,18 +35,19 @@ const login = async (req, res) => {
         const {email,password} = req.body;
         const matched_User = await User.findOne({email});
         if(!matched_User){
-            return res.status(404).json({message:"User not found"});
+            return res.status(404).json({success:false,message:"User not found"});
         }
 
         if(matched_User.password==password){
-            return res.status(200).json({message:"User found"});
+            return res.status(200).json({success:true,message:"User found"});
         }
         else{
-            return res.status(401).json({message:"Wrong Password"});
+            return res.status(401).json({success:false,message:"Wrong Password"});
         }
     }
     catch(error){
         console.error(error);
+        return res.status(400).json({success:false,message:"Login failed"});
     }
 };
 
