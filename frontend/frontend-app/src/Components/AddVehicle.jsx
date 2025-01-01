@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 const AddVehicle = () => {
@@ -23,16 +22,19 @@ const AddVehicle = () => {
     setError("");
 
     try {
-      const response = await axios.post("http://localhost:4000/api/add-vehicle", {
-        vehicle_name: vehicleName,
-        owner_name: ownerName,
-        category,
-        reg_no: regNo,
-        model,
-        purchase_date: purchaseDate,
-        brand,
-        image,
-      });
+      const response = await axios.post(
+        "http://localhost:4000/api/add-vehicle",
+        {
+          vehicle_name: vehicleName,
+          owner_name: ownerName,
+          category,
+          reg_no: regNo,
+          model,
+          purchase_date: purchaseDate,
+          brand,
+          image,
+        }
+      );
 
       if (response.data.success) {
         alert("Vehicle added successfully!");
@@ -60,7 +62,22 @@ const AddVehicle = () => {
 
   return (
     <div className="h-fit bg-gradient-to-br from-gray-900 to-gray-700">
-      <Navbar />
+      {/* navbar */}
+      <div className="bg-black text-white py-4 font-bold text-2xl">
+        <div className="flex items-center text-center justify-center w-100 ml-14">
+          <div className="flex-1 ">
+            <h1>Welcome to Bhat's Garage</h1>
+          </div>
+
+          <div className=" text-xl flex gap-10">
+            <Link to="/dashboard" className="text-white hover:underline mr-10">
+              Dashboard
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Dashboard */}
       <div className="flex justify-center items-center py-12">
         <div className="w-full max-w-lg bg-green-400 p-8 rounded-lg shadow-lg">
           <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">
@@ -68,7 +85,10 @@ const AddVehicle = () => {
           </h1>
           <form onSubmit={handleFormSubmit} className="space-y-4">
             <div>
-              <label htmlFor="vehicleName" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="vehicleName"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Vehicle Name
               </label>
               <input
@@ -82,7 +102,10 @@ const AddVehicle = () => {
               />
             </div>
             <div>
-              <label htmlFor="ownerName" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="ownerName"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Owner Name
               </label>
               <input
@@ -96,7 +119,10 @@ const AddVehicle = () => {
               />
             </div>
             <div>
-              <label htmlFor="category" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="category"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Category
               </label>
               <select
@@ -112,7 +138,10 @@ const AddVehicle = () => {
               </select>
             </div>
             <div>
-              <label htmlFor="regNo" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="regNo"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Registration Number
               </label>
               <input
@@ -126,7 +155,10 @@ const AddVehicle = () => {
               />
             </div>
             <div>
-              <label htmlFor="model" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="model"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Model
               </label>
               <input
@@ -140,7 +172,10 @@ const AddVehicle = () => {
               />
             </div>
             <div>
-              <label htmlFor="purchaseDate" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="purchaseDate"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Purchase Date
               </label>
               <input
@@ -153,7 +188,10 @@ const AddVehicle = () => {
               />
             </div>
             <div>
-              <label htmlFor="brand" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="brand"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Brand
               </label>
               <input
@@ -167,7 +205,10 @@ const AddVehicle = () => {
               />
             </div>
             <div>
-              <label htmlFor="image" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="image"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Upload Image
               </label>
               <input
@@ -178,7 +219,9 @@ const AddVehicle = () => {
                 className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
-            {error && <div className="text-red-500 text-center text-sm">{error}</div>}
+            {error && (
+              <div className="text-red-500 text-center text-sm">{error}</div>
+            )}
             <button
               type="submit"
               className={`w-full py-2 text-white font-semibold rounded-lg ${

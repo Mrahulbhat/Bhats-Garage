@@ -23,8 +23,15 @@ const addVehicle = async (req, res) => {
       brand,
       image,
     });
+
     await newVehicle.save();
-    return res.status(201).json({ message: "New vehicle created", data: newVehicle });
+    return res
+      .status(201)
+      .json({
+        success:true,
+        message: "New vehicle created",
+        data: newVehicle,
+      });
   } catch (error) {
     console.error("Error in adding new vehicle: " + error);
 
@@ -42,7 +49,9 @@ const addVehicle = async (req, res) => {
 const getAllVehicles = async (req, res) => {
   try {
     const vehicles = await Vehicle.find();
-    return dres.status(200).json({ message: "All vehicle details", data: vehicles });
+    return res
+      .status(200)
+      .json({ message: "All vehicle details", data: vehicles });
   } catch (error) {
     console.error(error);
   }
