@@ -24,13 +24,13 @@ const addVehicle = async (req, res) => {
       image,
     });
     await newVehicle.save();
-    res.status(201).json({ message: "New vehicle created", data: newVehicle });
+    return res.status(201).json({ message: "New vehicle created", data: newVehicle });
   } catch (error) {
     console.error("Error in adding new vehicle: " + error);
 
     // Handle duplicate key error (e.g., unique violation)
     if (error.code === 11000) {
-      res
+      return res
         .status(400)
         .json({ error: "Duplicate key error: Reg_no already exists" });
     } else {
@@ -42,7 +42,7 @@ const addVehicle = async (req, res) => {
 const getAllVehicles = async (req, res) => {
   try {
     const vehicles = await Vehicle.find();
-    res.status(200).json({ message: "All user details", data: vehicles });
+    return dres.status(200).json({ message: "All vehicle details", data: vehicles });
   } catch (error) {
     console.error(error);
   }
