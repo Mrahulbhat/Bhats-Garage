@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
 import axios from "axios";
 
 const Login = () => {
@@ -11,7 +12,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const ValidateForm = async (e) => {
-    e.preventDefault(); // Prevent the default form submission
+    e.preventDefault();
 
     setLoading(true);
     setError("");
@@ -23,13 +24,10 @@ const Login = () => {
       });
 
       if (response.data.success) {
-        alert("Login successful!");
-        setEmail(""); // Clear the email input on successful login
-        setPassword(""); // Clear the password input on successful login
-        setError(""); // Clear any previous errors
-
-        // Redirect to a new page after successful login
-        navigate("/dashboard"); // You can change the route as needed
+        setEmail("");
+        setPassword("");
+        setError("");
+        navigate("/dashboard");
       } else {
         setError(response.data.message);
       }
@@ -42,50 +40,64 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <div className="text-center mt-20 text-white font-bold tracking-widest">
-        <h1 className="text-2xl">Login</h1>
-        <div className="border-white border-2 rounded-xl py-10 px-10 w-[600px] mt-10 ml-[28vw]">
-          <form onSubmit={ValidateForm}>
-            <label htmlFor="email">Email: </label>
-            <input
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              placeholder="Enter email"
-              required
-              className="border-2 rounded-lg px-4 py-2 mt-2 text-black"
-            />
-            <br />
-            <br />
-            <label htmlFor="password">Password: </label>
-            <input
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-              placeholder="Enter password"
-              required
-              className="border-2 rounded-lg px-4 py-2 mt-2 text-black"
-            />
-            <br />
-            <br />
+    <div className="h-[100vh] bg-gradient-to-r from-green-500 to-blue-500">
+      <Navbar />
+      <div className="flex flex-col items-center py-24 ">
+        <div className="w-full max-w-md p-8 bg-gray-900 rounded-xl shadow-lg">
+          <h1 className="text-3xl font-bold text-center mb-6 text-white">
+            Login
+          </h1>
+          <form onSubmit={ValidateForm} className="space-y-4">
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-white"
+              >
+                Email
+              </label>
+              <input
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                placeholder="Enter your email"
+                required
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-white"
+              >
+                Password
+              </label>
+              <input
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                placeholder="Enter your password"
+                required
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+            </div>
             <button
               type="submit"
-              className="bg-green-600 px-8 py-2 rounded-2xl hover:bg-green-700 transition duration-300"
-              disabled={loading} // Disable the button while loading
+              className={`w-full py-2 text-white font-semibold rounded-lg ${
+                loading ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-600"
+              } transition duration-300`}
+              disabled={loading}
             >
               {loading ? "Logging in..." : "Login"}
             </button>
-            {error && <div className="text-red-500 mt-4 text-sm">{error}</div>}
-            <div>
-              <p className="text-sm mt-8">
-                Not a User?{" "}
-                <Link to="/signUp">
-                  <span className="underline">Create Account</span>
-                </Link>
-              </p>
+            {error && (
+              <div className="text-red-500 text-center mt-2 text-sm">
+                {error}
+              </div>
+            )}
+            <div className="text-center text-sm mt-4 text-gray-600">
+              Not a user?  <span className="text-white"> Contact Admin </span>
             </div>
           </form>
         </div>

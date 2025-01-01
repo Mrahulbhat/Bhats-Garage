@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const User = require('../models/user_model.js');
-const {createUser,getAllUsers,login} = require('../controllers/controller.js');
-//create User
+const {getAllVehicles,login, addVehicle} = require('../controllers/controller.js');
 
-router.get('/getAllUsers',getAllUsers)
-router.post("/signup", createUser);
+
+router.post('/add-vehicle',addVehicle)
+router.get('/vehicles',getAllVehicles);
 router.post('/login',login);
 
 

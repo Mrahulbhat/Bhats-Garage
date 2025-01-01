@@ -1,18 +1,18 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./Components/Navbar";
 import Home from "./Components/Home";
 import Login from "./Components/Login";
-import Signup from "./Components/Signup";
+import Dashboard from "./Components/Dashboard";
+import AddVehicle from "./Components/AddVehicle";
 
 const App = () => {
   return (
     <div className="bg-gray-800 h-[100vh]">
-      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signUp" element={<Signup/>} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/add-vehicle" element={<AddVehicle/>}/>
       </Routes>
     </div>
   );
